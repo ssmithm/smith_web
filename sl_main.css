@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+.btn.btn-primary {
+  border-radius: 2px;
+  border: 0px;
+  color: #fbd1d5;
+  text-shadow: none;
+  background-color: #ffffff;
+}
+
+.btn.btn-primary:hover {
+  color: #ffffff;
+  background-color: #fbd1d5;
+}
+
+.btn-secondary {
+  background-color: #E8DFE0;
+  color: #ffffff;
+  margin: 0 0 30px;
+}
+
+a.btn:link, a.btn:visited {
+	background-color: white;
+	color: #1E354B;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+a.btn:hover, a.btn:active {
+	background-color: #1E354B;
+	color: white;
+}
+
+a.btn-sm:link, a.btn-sm:visited {
+	background-color: white;
+	color: #1E354B;
+	padding: 10px 30px 10px 0px;
+	display: inline-block;
+}
+
+a.btn-sm:hover, a.btn-sm:active {
+	color: #4D7988;
+}
