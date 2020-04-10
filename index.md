@@ -1,22 +1,95 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="sl_main.css" type="text/css">
+
+          
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>Steven Smith Lab</title>
+    </head>
+  
+    <body>
+      
+    <!--    <div class="container-fluid main-container">
+            <div class="container"><div class="row"><div class="col-sm">  -->
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="#"><img src="nav-bar_icon.svg" width="50" height="50" alt=""></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="https://pharmacy.ufl.edu/profile/smith-steven-1/">bio</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="cv.pdf">cv</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="research.html">research</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="people.html">people<!--<span class="sr-only">(current)</span>--></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled" href="software.html" tabindex="-1" aria-disabled="true">software</a>
+                      </li>               
+                    </ul>
+                </div>
+            </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm">
+                    <h3> Steven Smith </h3>
+                    Assistant Professor<br>
+                    <a href="http://ptr.pharmacy.ufl.edu/">Department of Pharmacotherapy and Translational Research</a><br>
+                    <a href="http://pop.pharmacy.ufl.edu/">Department of Pharmaceutical Outcomes and Policy</a><br><br> 
+                    Associate Director, <a href="http://cicmd.center.ufl.edu/">Center for Integrative Cardiovascular and Metabolic Disease</a><br><br> 
+                    Member, <a href="http://codes.pharmacy.ufl.edu/">Center of Drug Evaluation and Safety</a><br><br> 
+                    University of Florida<br><br> 
+                    
+                    <div class="col-sm-6" style="text-align:left">
+                        <a class="btn-sm" href="https://twitter.com/SteveSmithUF"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                        <a class="btn-sm" href="https://github.com/ssmithm"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+                        <a class="btn-sm" href="https://www.linkedin.com/in/steven-smith-09b80659/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+                    </div>
+
+                </div>
+                <div class="col-sm">
+                    <img src="CICMD_JJ100048_cropped.png" width="400" alt="">
+                </div>
+            </div>
+            <div class="row"><br>
+                <hr>
+                <div class="col-sm">
+                    <h5>Background</h5>
+    
+                    I am a pharmacist and epidemiologist specializing in cardiovascular medicine, especially hypertension. I obtained my PharmD in 2007 and MPH (Emphasis: Biostatistics and Epidemiology) in 2011, both from the University of Florida. I completed a Pharmacy Practice Residency at the NF/SG Veterans Affairs Hospital (2008) and a postdoctoral fellowship in Family Medicine at the University of Florida (2011). I started my career at the University of Colorado in 2011 and returned to the University of Florida in 2014. 
+                    <br>
+                    <hr>
+                    <h5>Contact</h5>
+                    <a href="mailto:ssmith@cop.ufl.edu">ssmith@cop.ufl.edu</a>
+                    
+                </div>
+            </div>
+        </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
