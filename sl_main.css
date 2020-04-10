@@ -38,10 +38,15 @@ a.btn:hover, a.btn:active {
 a.btn-sm:link, a.btn-sm:visited {
 	background-color: white;
 	color: #1E354B;
-	padding: 10px 30px 10px 0px;
+	padding: 10px 10px 10px 10px;
 	display: inline-block;
 }
 
 a.btn-sm:hover, a.btn-sm:active {
 	color: #4D7988;
+}
+
+a.topnavlink:hover, a.topnavlink:active {
+	background-color: white;
+	color: #1E354B;
 }
