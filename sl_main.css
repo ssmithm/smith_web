@@ -43,9 +43,9 @@ a.btn-sm:link, a.btn-sm:visited {
 }
 
 a.btn-sm:hover, a.btn-sm:active {
-	color: #4D7988;
+	color: #4D7988 
 }
 
 a.topnavlink:hover, a.topnavlink:active {
-	color: #4D7988;
+	color: #4D7988 !important
 }
