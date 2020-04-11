@@ -21,10 +21,15 @@
   margin: 0 0 30px;
 }
 
+.btn-tertiary {
+    color: #4D7988;
+    margin: 0 0 0 0;
+}
+
 a.btn:link, a.btn:visited {
-	background-color: white;
 	color: #1E354B;
-	padding: 10px;
+	padding: 0px;
+    margin: 0px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
