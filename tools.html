@@ -71,8 +71,41 @@
                         <p style="line-height: 1.5"><h4><font color="gray">Overview</font></h4></p>
                     </div>
                     <div class="row">
-                        <p>This page contains (or at least will, shortly) a collection of software tools, primarily code or curated datasets, that has come out of my research program and which I think may be useful to other researchers.</p>
+                        <p>This page contains a collection of software tools, primarily code or curated datasets, that has come out of my research program and which I think may be useful to other researchers.</p>
                         <p>If you discover errors, please bring them to my attention via email (<a class="btn-tertiary" href="mailto:ssmith@cop.ufl.edu">ssmith@cop.ufl.edu</a>).</p>
+                   </div>
+
+                    <div class="row mt-4">
+                        <p style="line-height: 1.5"><h4><font color="gray">RxNorm</font></h4></p>
+                    </div>
+                    <div class="row">
+                        <p>We are curating lists of RXCUIs for common chronic diseases from RxNorm, which can be found below.</p>
+                        
+                        <table class="table">
+                            <caption>*Dates indicate RxNorm files queried in developing these datasets; any RxNorm CUI or NDC created after the end date will not be present, and similarly any very old NDC (no longer in use prior to 2005) is unlikely to be captured.</caption>
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">drug class</th>
+                                  <th scope="col">id type</th>
+                                  <th scope="col">description</th>
+                                  <th scope="col">dates*</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">antihypertensives</th>
+                                  <td><a class="btn-tertiary" href="data/rxnorm/antihtn_rxcui_classes.sas7bdat"><strong>RXCUIs</strong></a></td>
+                                  <td>A SAS dataset containing a curated list of antihypertensive <strong>RXCUIs</strong> that includes only term types (TTY) allowable in the <a class="btn-tertiary" href="https://pcornet.org/wp-content/uploads/2019/09/PCORnet-Common-Data-Model-v51-2019_09_12.pdf">PCORnet common data model</a>; also mapped are drug names and classes, both individually, and for combination products and identifies fixed-dose combinations and the number of antihypertensive drugs associated with each RXCUI</td>
+                                  <td>2005 - 02Mar2020</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row"></th>
+                                  <td><a class="btn-tertiary" href="data/rxnorm/antihtn_ndc_classes.sas7bdat"><strong>NDCs</strong></a></td>
+                                  <td>A SAS dataset containing a curated list of antihypertensive <strong>NDCs</strong> mapped from the above RXCUI file; as above, it includes only term types (TTY) allowable in the <a class="btn-tertiary" href="https://pcornet.org/wp-content/uploads/2019/09/PCORnet-Common-Data-Model-v51-2019_09_12.pdf">PCORnet common data model</a>; drug names, classes, fixed-dose combination indicators and number of antihypertensive drugs are also mapped from the RXCUI file</td>
+                                  <td>2005 - 02Mar2020</td>
+                                </tr>
+                              </tbody>
+                            </table>
                    </div>
         
                    
