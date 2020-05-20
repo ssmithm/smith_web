@@ -82,30 +82,19 @@
                         <p>We are curating lists of drugs for common chronic diseases from RxNorm, which can be found below.</p>
                         
                         <table class="table">
+                            <!--
                             <caption>*Dates indicate RxNorm files queried in developing these datasets; any RxNorm CUI or NDC created after the end date will not be present, and similarly very old NDCs (no longer in use prior to 2005) are unlikely to be captured.</caption>
+                            -->
                               <thead class="thead-dark">
                                 <tr>
                                   <th scope="col">drug class</th>
-                                  <th scope="col">id type</th>
                                   <th scope="col">description</th>
-                                  <th scope="col">dates*</th>
-                                  <th scope="col">updated</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <th scope="row">antihypertensives</th>
-                                  <td><a class="btn-tertiary" href="data/rxnorm/antihtn_rxcui_classes.sas7bdat"><strong>RXCUIs</strong></a></td>
-                                  <td>A SAS dataset containing a curated list of antihypertensive <strong>RXCUIs</strong> that includes only term types (TTY) allowable in the <a class="btn-tertiary" href="https://pcornet.org/wp-content/uploads/2019/09/PCORnet-Common-Data-Model-v51-2019_09_12.pdf">PCORnet common data model</a>; also mapped are drug names and classes, both individually, and for combination products, a fixed-dose combination indicator, and the number of antihypertensive drugs associated with each RXCUI</td>
-                                  <td>2005 - 06Apr2020</td>
-                                  <td>11May2020</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row"></th>
-                                  <td><a class="btn-tertiary" href="data/rxnorm/antihtn_ndc_classes.sas7bdat"><strong>NDCs</strong></a></td>
-                                  <td>A SAS dataset containing a curated list of antihypertensive <strong>NDCs</strong> mapped from the above RXCUI file; as above, it includes only term types (TTY) allowable in the <a class="btn-tertiary" href="https://pcornet.org/wp-content/uploads/2019/09/PCORnet-Common-Data-Model-v51-2019_09_12.pdf">PCORnet common data model</a>; drug names, classes, fixed-dose combination indicators and number of antihypertensive drugs are also mapped from the RXCUI file; note also <em>only 11-digit NDCs are included</em> as per PCORnet CDM specification</td>
-                                  <td>2005 - 06Apr2020</td>
-                                  <td>11May2020</td>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/rxnorm-drug-lists/tree/master/antihypertensive_drugs"><strong>antihypertensives</strong></a></th>
+                                  <td>SAS datasets containing curated lists of antihypertensive <strong>RXCUIs</strong> and <strong>NDCs</strong> for antihypertensive drugs. RXCUIs includes only term types (TTY) allowable in the <a class="btn-tertiary" href="https://pcornet.org/wp-content/uploads/2019/09/PCORnet-Common-Data-Model-v51-2019_09_12.pdf">PCORnet common data model</a>; also mapped are drug names and classes, both individually, and for combination products, a fixed-dose combination indicator, and the number of antihypertensive drugs associated with each RXCUI. <br><br>NDC lists are derived from the RXCUI lists, and thus are conditional on the above criteria for selecting RXCUIs; in addition, <em>only 11-digit NDCs</em> are included, as per PCORnet CDM specification</td>
                                 </tr>
                               </tbody>
                             </table>
