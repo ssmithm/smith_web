@@ -100,7 +100,29 @@
                             </table>
                    </div>
         
-                   
+
+                    <div class="row mt-4">
+                        <p style="line-height: 1.5"><h4><font color="gray">Medication Reference Terminology (MED-RT)</font></h4></p>
+                    </div>
+                    <div class="row">
+                        <p>MED-RT is produced by the U.S. Veterans Health Affairs and replaces the now-deprecated National Drug Formulary-Reference Terminology (NDFRT). The tool below includes a SAS program and XML map to convert MEDRT from the source XML file to SAS datasets.</p>
+                        
+                        <table class="table">
+                              <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">program</th>
+                                  <th scope="col">description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/medrt-to-sas"><strong>MEDRT-to-SAS</strong></a></th>
+                                  <td>SAS program and accompanying XML mapping file to extract MEDRT terms, concepts, and associations from the source XML files produced as part of the <a class="btn-tertiary" href="https://evs.nci.nih.gov/ftp1/MED-RT/medrt_about.html">Federated Medication Terminologies</a>. The program creates 6 datasets (terms, concepts, concept properties, concept synonyms, associations and association qualifiers).</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                   </div>
+        
                 </div>
                 </div>
             </div>
