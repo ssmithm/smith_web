@@ -83,6 +83,7 @@
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="#RxNorm">RxNorm</a>
                             <a class="dropdown-item" href="#MEDRT">MED-RT</a>
+                            <a class="dropdown-item" href="#NPI">NPPES NPI</a>
                             <a class="dropdown-item" href="#macros">SAS Macros</a>
                           </div>
                         </div>
@@ -140,7 +141,29 @@
                             </table>
                    </div>
 
-    
+                    <div class="row mt-4">
+                        <p style="line-height: 1.5"><h4 id="NPI"><font color="#2B2B2B">NPPES National Provider Indicator (NPI)</font></h4></p>
+                    </div>
+                    <div class="row border-bottom border-dark">
+                        <p>The <a class="btn-tertiary" href="https://www.cms.gov" target="_blank" rel="noopener">Centers for Medicare and Medicaid Services (CMS)</a> publishes monthly files including information on all U.S. providers with National Provider Indicators (NPIs). The National Bureau of Economic Research (NBER) <a class="btn-tertiary" href="https://data.nber.org/data/npi.html" target="_blank" rel="noopener">used to convert these to SAS (and other) useful datasets</a>, but it appears they have stopped, unfortunately.</p>
+                        
+                        <table class="table">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">program</th>
+                                  <th scope="col">description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/npi-to-sas" target="_blank" rel="noopener"><strong>NPI SAS import</strong></a></th>
+                                  <td>SAS program to import NPI comma-separated value files (and related reference files). Source files can be found <a class="btn-tertiary" href="https://download.cms.gov/nppes/NPI_Files.html" target="_blank" rel="noopener">here</a> under the Full Replacement Monthly NPI File heading. Check the README for the current version the import program supports (I am not updating this monthly, but will try to catch updates with changes to the data structure).</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                   </div>    
+
+
                     <div class="row mt-4">
                         <p style="line-height: 1.5"><h4 id="macros"><font color="#2B2B2B">Assorted SAS Macros</font></h4></p>
                     </div>
