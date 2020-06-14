@@ -19,11 +19,12 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+        <!-- Fonts -->  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
         <!-- Custom CSS -->
         <link rel="stylesheet" href="libs/sl_main.css" type="text/css">
-
-          
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <title>sms | tools</title>
     </head>
@@ -82,6 +83,7 @@
 
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="#RxNorm">RxNorm</a>
+                            <a class="dropdown-item" href="#MMSL">Multum Lexicon Drug Codes</a>  
                             <a class="dropdown-item" href="#MEDRT">MED-RT</a>
                             <a class="dropdown-item" href="#NPI">NPPES NPI</a>
                             <a class="dropdown-item" href="#macros">SAS Macros</a>
@@ -111,13 +113,35 @@
                               </thead>
                               <tbody>
                                 <tr>
-                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/rxnorm-drug-lists/tree/master/antihypertensive_drugs" target="_blank" rel="noopener"><strong>antihypertensives</strong></a></th>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/rxnorm-drug-lists/tree/master/antihypertensive_drugs" target="_blank" rel="noopener"><strong>antihypertensives</strong><img src="assets/get_app-24px.svg" alt="get app"></a></th>
                                   <td>SAS datasets containing curated lists of antihypertensive <strong>RXCUIs</strong> and <strong>NDCs</strong> for antihypertensive drugs. RXCUIs includes only term types (TTY) allowable in the <a class="btn-tertiary" href="https://pcornet.org/wp-content/uploads/2019/09/PCORnet-Common-Data-Model-v51-2019_09_12.pdf" target="_blank" rel="noopener">PCORnet common data model</a>; also mapped are drug names and classes, both individually, and for combination products, a fixed-dose combination indicator, and the number of antihypertensive drugs associated with each RXCUI. <br><br>NDC lists are derived from the RXCUI lists, and thus are conditional on the above criteria for selecting RXCUIs; in addition, <em>only 11-digit NDCs</em> are included, as per PCORnet CDM specification</td>
                                 </tr>
                               </tbody>
                             </table>
                    </div>
         
+
+                    <div class="row mt-4">
+                        <p style="line-height: 1.5"><h4 id="MMSL"><font color="#2B2B2B">Multum Lexicon Drug Codes</font></h4></p>
+                    </div>
+                    <div class="row border-bottom border-dark">
+                        <p>Many publicly-available datasets in the U.S. (e.g., NHANES, NAMCS, MEPS, etc..) code drugs using the proprietary Multum Lexicon database produced by Cerner. The CDC provides a <a class="btn-tertiary" href="https://www2.cdc.gov/drugs/applicationnav1.asp" target="_blank" rel="noopener">web-based tool for searching drug codes</a>, but it is not particularly efficient for creating longer lists of drugs. Fortunately, RxNorm incorporates these codes and the RXNCONSO file can be queried relatively easily for a list of generic drugs. Here is SAS code we developed for that purpose, as well as example SAS datasets for antihypertensive drugs.</p>
+                        
+                        <table class="table">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th scope="col">program</th>
+                                  <th scope="col">description</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/mmsl-drug-codes-SAS" target="_blank" rel="noopener"><strong>Multum drug codes</strong><img src="assets/get_app-24px.svg" alt="get app"></a></th>
+                                  <td>SAS program and accompanying example datasets (for antihypertensives) to extract Multum Lexicon drug codes (d#####) from publicly-available <a class="btn-tertiary" href="https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html" target="_blank" rel="noopener">RxNorm files</a>.</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                   </div>
 
                     <div class="row mt-4">
                         <p style="line-height: 1.5"><h4 id="MEDRT"><font color="#2B2B2B">Medication Reference Terminology (MED-RT)</font></h4></p>
@@ -134,7 +158,7 @@
                               </thead>
                               <tbody>
                                 <tr>
-                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/medrt-to-sas" target="_blank" rel="noopener"><strong>MEDRT-to-SAS</strong></a></th>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/medrt-to-sas" target="_blank" rel="noopener"><strong>MEDRT-to-SAS</strong><img src="assets/get_app-24px.svg" alt="get app"></a></th>
                                   <td>SAS program and accompanying XML mapping file to extract MEDRT terms, concepts, and associations from the source XML files produced as part of the <a class="btn-tertiary" href="https://evs.nci.nih.gov/ftp1/MED-RT/medrt_about.html" target="_blank" rel="noopener">Federated Medication Terminologies</a>. The program creates 6 datasets (terms, concepts, concept properties, concept synonyms, associations and association qualifiers).</td>
                                 </tr>
                               </tbody>
@@ -156,7 +180,7 @@
                               </thead>
                               <tbody>
                                 <tr>
-                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/npi-to-sas" target="_blank" rel="noopener"><strong>NPI SAS import</strong></a></th>
+                                  <th scope="row"><a class="btn-tertiary" href="https://github.com/ssmithm/npi-to-sas" target="_blank" rel="noopener"><strong>NPI SAS import</strong><img src="assets/get_app-24px.svg" alt="get app"></a></th>
                                   <td>SAS program to import NPI comma-separated value files (and related reference files). Source files can be found <a class="btn-tertiary" href="https://download.cms.gov/nppes/NPI_Files.html" target="_blank" rel="noopener">here</a> under the Full Replacement Monthly NPI File heading. Check the README for the current version the import program supports (I am not updating this monthly, but will try to catch updates with changes to the data structure).</td>
                                 </tr>
                               </tbody>
@@ -179,7 +203,7 @@
                               </thead>
                               <tbody>
                                 <tr>
-                                  <th scope="row"><a class="btn-tertiary" href="data/squeeze2.sas" download="squeeze"><strong>SQUEEZE</strong></a></th>
+                                  <th scope="row"><a class="btn-tertiary" href="data/squeeze2.sas" download="squeeze"><strong>SQUEEZE</strong><img src="assets/get_app-24px.svg" alt="get app"></a></th>
                                   <td>SAS program that compresses variable lengths to the minimum necessary, thus decreasing dataset size. Can also be found via the SAS website <a class="btn-tertiary" href="http://support.sas.com/kb/24/804.html">here</a>.</td>
                                 </tr>
                               </tbody>
