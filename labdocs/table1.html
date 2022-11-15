@@ -2679,7 +2679,9 @@ Note
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;C:/Users/ssmithm/Dropbox (UFL)/R Projects/K01-Initial_Antihtn_Prescribing/data/aim1cohort.rda&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">&quot;C:/Users/ssmithm/Dropbox (UFL)/R Projects/K01-Initial_Antihtn_Prescribing/data/aim1cohort.rda&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> aim1cohort </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
@@ -2697,85 +2699,83 @@ A note on ’pipe’s
 </div>
 <p>Ok, here’s the data wrangling code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> aim1cohort </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> tab1 <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select only variables needed; ends_with() function is a nifty short cut to </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># grab all variables whose name ends with that string</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;patid&quot;</span>,<span class="st">&quot;source&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;age_cat&quot;</span>, <span class="st">&quot;hispanic&quot;</span>,<span class="st">&quot;sex&quot;</span>,<span class="st">&quot;race&quot;</span>,<span class="st">&quot;index_year&quot;</span>, </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">ends_with</span>(<span class="st">&quot;indicator&quot;</span>), <span class="st">&quot;combined_score_num&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate() is for creating new variables. Some of this should look pretty </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># similar to what you&#39;re used to in SAS. </span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c() function just combines multiple things and works similarly here to a</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># SAS parenthetical list, i.e., race in (&quot;No Information&quot;, ...)</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">race =</span> <span class="fu">if_else</span>(race <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;No Information&quot;</span>,<span class="st">&quot;Refuse to Answer&quot;</span>,<span class="st">&quot;Unknown&quot;</span>), <span class="st">&quot;Unknown&quot;</span>, race),</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>         </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>         <span class="co"># factor() is a vector type for categorical data and it&#39;s important for</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># table1 package because it&#39;s how table1 figures out what is categorical</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>         <span class="co"># vs. continuous, and as we&#39;ll see below, how to order them in the output. </span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">hispanic =</span> <span class="fu">factor</span>(hispanic),</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">sex =</span> <span class="fu">factor</span>(sex),</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">index_year =</span> <span class="fu">factor</span>(index_year),</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">statinindicator =</span> <span class="fu">factor</span>(statinindicator),</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">aspirinindicator =</span> <span class="fu">factor</span>(aspirinindicator),</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">smokingindicator =</span> <span class="fu">factor</span>(smokingindicator),</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">diabetesindicator =</span> <span class="fu">factor</span>(diabetesindicator),</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">ckdindicator =</span> <span class="fu">factor</span>(ckdindicator),</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">esrdindicator =</span> <span class="fu">factor</span>(esrdindicator),</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">hfejindicator =</span> <span class="fu">factor</span>(hfejindicator),</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">chdindicator =</span> <span class="fu">factor</span>(chdindicator),</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">pcrindicator =</span> <span class="fu">factor</span>(pcrindicator),</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">strokeindicator =</span> <span class="fu">factor</span>(strokeindicator),</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">padindicator =</span> <span class="fu">factor</span>(padindicator),</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>         <span class="at">ascvdindicator =</span> <span class="fu">factor</span>(ascvdindicator),</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>         <span class="at">afindicator =</span> <span class="fu">factor</span>(afindicator),</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">copdindicator =</span> <span class="fu">factor</span>(copdindicator),</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">asthmaindicator =</span> <span class="fu">factor</span>(asthmaindicator),</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>         <span class="at">depressionindicator =</span> <span class="fu">factor</span>(depressionindicator),</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>         <span class="at">goutindicator =</span> <span class="fu">factor</span>(goutindicator),</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">source =</span> <span class="fu">factor</span>(source),</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">anticogindicator =</span> <span class="fu">factor</span>(anticogindicator),</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>         <span class="at">ktindicator =</span> <span class="fu">factor</span>(ktindicator),</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>         <span class="at">osaindicator =</span> <span class="fu">factor</span>(osaindicator)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># arrange() sorts.</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(patid) <span class="sc">%&gt;%</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># distinct() picks out distinct values, here of patid.</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(patid, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># here we go in and work on specific columns of `tab1` dataset and </span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># order the levels (values) of that column in the way we want it presented in</span></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># the output table, using the factor() function. Basically, we&#39;re just taking </span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># the column as is, and replacing it with the same data, but telling R what is </span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co"># should be the intrinsic order of these values when R outputs anything with it. </span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co"># (Not actually changing given values for a given observation)</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>race <span class="ot">&lt;-</span> <span class="fu">factor</span>(tab1<span class="sc">$</span>race, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;American Indian or Alaska Native&quot;</span>,</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Asian&quot;</span>,</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Black or African American&quot;</span>,</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Native Hawaiian or Other Pacific&quot;</span>,</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;White&quot;</span>,</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Multiple Race&quot;</span>,</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Other&quot;</span>,</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Unknown&quot;</span>))</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>age_cat <span class="ot">&lt;-</span> <span class="fu">factor</span>(tab1<span class="sc">$</span>age_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;45 y&quot;</span>, <span class="st">&quot;45-64 y&quot;</span>, <span class="st">&quot;&gt;65 y&quot;</span>))</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>hispanic <span class="ot">&lt;-</span> <span class="fu">factor</span>(tab1<span class="sc">$</span>hispanic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Hispanic&quot;</span>, <span class="st">&quot;Not Hispanic&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co"># note that above I&#39;m using base R coding, not tidyverse syntax. </span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co"># I could have accomplished the above with tidyverse (dplyr) syntax also:</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> tab1 <span class="sc">%&gt;%</span> </span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">race =</span> <span class="fu">factor</span>(race, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;American Indian or Alaska Native&quot;</span>,</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Asian&quot;</span>,</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Black or African American&quot;</span>,</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Native Hawaiian or Other Pacific&quot;</span>,</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;White&quot;</span>,</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Multiple Race&quot;</span>,</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Other&quot;</span>,</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Unknown&quot;</span>)),</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_cat =</span> <span class="fu">factor</span>(age_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;45 y&quot;</span>, <span class="st">&quot;45-64 y&quot;</span>, <span class="st">&quot;&gt;65 y&quot;</span>)),</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>         hispanic <span class="ot">&lt;-</span> <span class="fu">factor</span>(hispanic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Hispanic&quot;</span>, <span class="st">&quot;Not Hispanic&quot;</span>, <span class="st">&quot;Unknown&quot;</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> tab1 <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select only variables needed; ends_with() function is a nifty short cut to </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># grab all variables whose name ends with that string</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;patid&quot;</span>,<span class="st">&quot;source&quot;</span>,<span class="st">&quot;age&quot;</span>,<span class="st">&quot;age_cat&quot;</span>, <span class="st">&quot;hispanic&quot;</span>,<span class="st">&quot;sex&quot;</span>,<span class="st">&quot;race&quot;</span>,<span class="st">&quot;index_year&quot;</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">ends_with</span>(<span class="st">&quot;indicator&quot;</span>), <span class="st">&quot;combined_score_num&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate() is for creating new variables. Some of this should look pretty </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># similar to what you&#39;re used to in SAS. </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c() function just combines multiple things and works similarly here to a</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># SAS parenthetical list, i.e., race in (&quot;No Information&quot;, ...)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">race =</span> <span class="fu">if_else</span>(race <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;No Information&quot;</span>,<span class="st">&quot;Refuse to Answer&quot;</span>,<span class="st">&quot;Unknown&quot;</span>), <span class="st">&quot;Unknown&quot;</span>, race),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># factor() is a vector type for categorical data and it&#39;s important for</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>         <span class="co"># table1 package because it&#39;s how table1 figures out what is categorical</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>         <span class="co"># vs. continuous, and as we&#39;ll see below, how to order them in the output. </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">hispanic =</span> <span class="fu">factor</span>(hispanic),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">sex =</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">index_year =</span> <span class="fu">factor</span>(index_year),</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">statinindicator =</span> <span class="fu">factor</span>(statinindicator),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">aspirinindicator =</span> <span class="fu">factor</span>(aspirinindicator),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">smokingindicator =</span> <span class="fu">factor</span>(smokingindicator),</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">diabetesindicator =</span> <span class="fu">factor</span>(diabetesindicator),</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">ckdindicator =</span> <span class="fu">factor</span>(ckdindicator),</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">esrdindicator =</span> <span class="fu">factor</span>(esrdindicator),</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">hfejindicator =</span> <span class="fu">factor</span>(hfejindicator),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">chdindicator =</span> <span class="fu">factor</span>(chdindicator),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">pcrindicator =</span> <span class="fu">factor</span>(pcrindicator),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">strokeindicator =</span> <span class="fu">factor</span>(strokeindicator),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">padindicator =</span> <span class="fu">factor</span>(padindicator),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">ascvdindicator =</span> <span class="fu">factor</span>(ascvdindicator),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">afindicator =</span> <span class="fu">factor</span>(afindicator),</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>         <span class="at">copdindicator =</span> <span class="fu">factor</span>(copdindicator),</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>         <span class="at">asthmaindicator =</span> <span class="fu">factor</span>(asthmaindicator),</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">depressionindicator =</span> <span class="fu">factor</span>(depressionindicator),</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">goutindicator =</span> <span class="fu">factor</span>(goutindicator),</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>         <span class="at">source =</span> <span class="fu">factor</span>(source),</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>         <span class="at">anticogindicator =</span> <span class="fu">factor</span>(anticogindicator),</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">ktindicator =</span> <span class="fu">factor</span>(ktindicator),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">osaindicator =</span> <span class="fu">factor</span>(osaindicator)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># arrange() sorts.</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(patid) <span class="sc">%&gt;%</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># distinct() picks out distinct values, here of patid.</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(patid, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># here we go in and work on specific columns of `tab1` dataset and </span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># order the levels (values) of that column in the way we want it presented in</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># the output table, using the factor() function. Basically, we&#39;re just taking </span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># the column as is, and replacing it with the same data, but telling R what is </span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># should be the intrinsic order of these values when R outputs anything with it. </span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># (Not actually changing given values for a given observation)</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>race <span class="ot">&lt;-</span> <span class="fu">factor</span>(tab1<span class="sc">$</span>race, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;American Indian or Alaska Native&quot;</span>,</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Asian&quot;</span>,</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Black or African American&quot;</span>,</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Native Hawaiian or Other Pacific&quot;</span>,</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;White&quot;</span>,</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Multiple Race&quot;</span>,</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Other&quot;</span>,</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;Unknown&quot;</span>))</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>age_cat <span class="ot">&lt;-</span> <span class="fu">factor</span>(tab1<span class="sc">$</span>age_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;45 y&quot;</span>, <span class="st">&quot;45-64 y&quot;</span>, <span class="st">&quot;&gt;65 y&quot;</span>))</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>tab1<span class="sc">$</span>hispanic <span class="ot">&lt;-</span> <span class="fu">factor</span>(tab1<span class="sc">$</span>hispanic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Hispanic&quot;</span>, <span class="st">&quot;Not Hispanic&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co"># note that above I&#39;m using base R coding, not tidyverse syntax. </span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="co"># I could have accomplished the above with tidyverse (dplyr) syntax also:</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">&lt;-</span> tab1 <span class="sc">%&gt;%</span> </span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">race =</span> <span class="fu">factor</span>(race, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;American Indian or Alaska Native&quot;</span>,</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Asian&quot;</span>,</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Black or African American&quot;</span>,</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Native Hawaiian or Other Pacific&quot;</span>,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;White&quot;</span>,</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Multiple Race&quot;</span>,</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Other&quot;</span>,</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Unknown&quot;</span>)),</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>         <span class="at">age_cat =</span> <span class="fu">factor</span>(age_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;45 y&quot;</span>, <span class="st">&quot;45-64 y&quot;</span>, <span class="st">&quot;&gt;65 y&quot;</span>)),</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>         hispanic <span class="ot">&lt;-</span> <span class="fu">factor</span>(hispanic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Hispanic&quot;</span>, <span class="st">&quot;Not Hispanic&quot;</span>, <span class="st">&quot;Unknown&quot;</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="labels-and-units" class="level2">
